@@ -1,0 +1,25 @@
+services:
+  web:
+    build: .
+    image: chanmyaeaung29/demoapp:1.0
+    container_name: demoapp
+    ports:
+      - "8080:8080"
+    volumes:
+      - shared-stuff:/stuff
+    networks:
+      - webnet
+  db:
+    image: "mysql"
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    volumes:
+      - db-data:/foo
+
+volumes:
+  shared-stuff:
+  db-data:
+
+networks:
+  webnet:
+    driver: bridge
